@@ -1,0 +1,27 @@
+//java 
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int increase=1;
+        for(int i=digits.length-1;i>=0;i--){
+            if(increase==0) break;
+            digits[i]=digits[i]+increase;
+            if(digits[i]==10){
+                digits[i]=0;
+                increase=1;
+            }else{
+                increase=0;
+            }
+        }
+
+        if(increase==1){
+            //开新数组
+            int[] newDigits=new int[digits.length+1];
+            newDigits[0]=1;
+            for(int i=1;i<newDigits.length;i++){
+                newDigits[i]=digits[i-1];
+            }
+            return newDigits;
+        }
+        return digits;
+    }
+}

@@ -1,0 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+ // 总是容易忘记节点的下一个，需要保存哪一个
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // 开始节点
+        if(l1==null && l2==null) return null;
+        if(l1==null&&l2!=null) return l2;
+        if(l1!=null&& l2==null) return l1;
+        ListNode head=null;
+        ListNode other=null;
+        if(l1.val<l2.val){
+            head=l1;
+            other=l2;
+        }else{
+            head=l2;
+            other=l1;
+        }
+        ListNode result=head;
+        // 遍历head
+        while(head!=null){
+             // 结束判定
+             if(head.next==null){
+                 head.next=other;
+                 break;
+             }
+             if(other==null){
+                 break;
+             }
+        
+             // 插入other节点，
+            ListNode nextHead=head.next;
+            if(nextHead.val>=other.val){
+                ListNode nextOther=other.next;
+                head.next=other;
+                other.next=nextHead;
+                other=nextOther;
+            }
+            head=head.next;
+        }
+        return result;
+    }
+}
